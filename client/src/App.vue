@@ -1,13 +1,55 @@
 <template>
-  <v-app>
+  <v-app style="background: #e3e3ee">
+    <!-- side navbar -->
+    <v-navigation-drawer
+      app
+      temporary
+      fixed
+      v-model="sideNav"
+    >
+      <v-toolbar
+        color="accent"
+        dark
+        flat
+      >
+        <v-toolbar-side-icon @click="toggleSideNav"></v-toolbar-side-icon>
+        <router-link
+          to="/"
+          tag="span"
+          style="cursor: pointer"
+        >
+          <h1 class="title pl-3">Lets Share</h1>
+        </router-link>
+      </v-toolbar>
+
+      <v-divider></v-divider>
+
+      <!-- side navbar links -->
+      <v-list>
+        <v-list-tile
+          v-for="item in sideNavItems"
+          :key="item.title"
+          :to="item.link"
+        >
+          <v-list-tile-action>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            {{item.title}}
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
     <!-- horizontal navbar -->
     <v-toolbar
       fixed
       color="primary"
       dark
     >
+
       <!-- app title -->
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click="toggleSideNav"></v-toolbar-side-icon>
       <v-toolbar-title class="hidden-xs-only">
         <router-link
           to="/"
@@ -62,6 +104,13 @@
 <script>
 export default {
   name: "App",
+
+  data() {
+    return {
+      sideNav: false
+    };
+  },
+
   computed: {
     horizontalNavItems() {
       return [
@@ -69,6 +118,19 @@ export default {
         { icon: "lock_open", title: "Sign In", link: "/signin" },
         { icon: "create", title: "Sign Up", link: "/signup" }
       ];
+    },
+    sideNavItems() {
+      return [
+        { icon: "chat", title: "Posts", link: "/posts" },
+        { icon: "lock_open", title: "Sign In", link: "/signin" },
+        { icon: "create", title: "Sign Up", link: "/signup" }
+      ];
+    }
+  },
+
+  methods: {
+    toggleSideNav() {
+      this.sideNav = !this.sideNav;
     }
   }
 };
