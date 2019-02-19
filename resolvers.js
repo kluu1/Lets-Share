@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = {
   Query: {
     getPosts: async (_, args, { Post }) => {
@@ -27,6 +29,18 @@ module.exports = {
         createdBy: creatorId
       }).save();
       return newPost;
+    },
+
+    signinUser: async (_, { username, password }, { User }) => {
+      const user = await User.findOne({ username });
+      if (!user) {
+        throw new Error('User not found!');
+      }
+      const isValidPassword = await bcrypt.compare(password, user.password);
+      if (!isValidPassword) {
+        throw new Error('Invalid Password!');
+      }
+      return user;
     },
 
     // destructure fields from 'args' and destructure 'User' from context
