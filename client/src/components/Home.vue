@@ -14,9 +14,9 @@
           >
             <v-progress-circular
               indeterminate
-              :size="70"
-              :width="7"
-              color="secondary"
+              :size="100"
+              :width="10"
+              color="primary"
             ></v-progress-circular>
           </v-layout>
         </v-container>
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { gql } from "apollo-boost";
 import { mapGetters } from "vuex";
 
 export default {
