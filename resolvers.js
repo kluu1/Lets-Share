@@ -1,4 +1,11 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+// create a function to generate jwt token
+const createToken = (user, secret, expiresIn) => {
+  const { username, email } = user;
+  return jwt.sign({ username, email }, secret, { expiresIn });
+};
 
 module.exports = {
   Query: {
@@ -40,7 +47,7 @@ module.exports = {
       if (!isValidPassword) {
         throw new Error('Invalid Password!');
       }
-      return user;
+      return { token: createToken(user, process.env.SECRET, '1hr') };
     },
 
     // destructure fields from 'args' and destructure 'User' from context
@@ -54,7 +61,7 @@ module.exports = {
         email,
         password
       }).save();
-      return newUser;
+      return { token: createToken(newUser, process.env.SECRET, '1hr') };
     }
   }
 };
