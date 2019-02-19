@@ -5,7 +5,7 @@ const path = require('path');
 
 // import environment variables and mongoose models
 require('dotenv').config();
-const User = require('./models/Users');
+const User = require('./models/User');
 const Post = require('./models/Post');
 
 // import graphql typeDefs and resolvers
