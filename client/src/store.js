@@ -3,14 +3,14 @@ import Vuex from 'vuex';
 
 import { defaultClient as apolloClient } from './main';
 
-import { GET_POSTS } from './queries';
+import { GET_POSTS, SIGNIN_USER } from './queries';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     posts: [],
-    loading: false
+    loading: false,
   },
 
   mutations: {
@@ -19,7 +19,7 @@ export default new Vuex.Store({
     },
     setLoading: (state, payload) => {
       state.loading = payload;
-    }
+    },
   },
 
   actions: {
@@ -29,7 +29,7 @@ export default new Vuex.Store({
       // use apolloClient to fire getPosts query
       apolloClient
         .query({
-          query: GET_POSTS
+          query: GET_POSTS,
         })
         .then(({ data }) => {
           // get data from actions to state via mutations
@@ -41,11 +41,24 @@ export default new Vuex.Store({
           commit('setLoading', false);
           console.error(err);
         });
-    }
+    },
+    signinUser: ({ commit }, payload) => {
+      apolloClient
+        .mutate({
+          mutation: SIGNIN_USER,
+          variables: payload,
+        })
+        .then(({ data }) => {
+          console.log(data.signinUser);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
 
   getters: {
     posts: (state) => state.posts,
-    loading: (state) => state.loading
-  }
+    loading: (state) => state.loading,
+  },
 });
