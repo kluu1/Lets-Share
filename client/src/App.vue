@@ -1,23 +1,10 @@
 <template>
   <v-app style="background: #e3e3ee">
     <!-- side navbar -->
-    <v-navigation-drawer
-      app
-      temporary
-      fixed
-      v-model="sideNav"
-    >
-      <v-toolbar
-        color="accent"
-        dark
-        flat
-      >
+    <v-navigation-drawer app temporary fixed v-model="sideNav">
+      <v-toolbar color="accent" dark flat>
         <v-toolbar-side-icon @click="toggleSideNav"></v-toolbar-side-icon>
-        <router-link
-          to="/"
-          tag="span"
-          style="cursor: pointer"
-        >
+        <router-link to="/" tag="span" style="cursor: pointer">
           <h1 class="title pl-3">Lets Share</h1>
         </router-link>
       </v-toolbar>
@@ -26,38 +13,21 @@
 
       <!-- side navbar links -->
       <v-list>
-        <v-list-tile
-          v-for="item in sideNavItems"
-          :key="item.title"
-          :to="item.link"
-        >
+        <v-list-tile v-for="item in sideNavItems" :key="item.title" :to="item.link">
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>
-          <v-list-tile-content>
-            {{item.title}}
-          </v-list-tile-content>
+          <v-list-tile-content>{{item.title}}</v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
     <!-- horizontal navbar -->
-    <v-toolbar
-      fixed
-      color="primary"
-      dark
-    >
-
+    <v-toolbar fixed color="primary" dark>
       <!-- app title -->
       <v-toolbar-side-icon @click="toggleSideNav"></v-toolbar-side-icon>
       <v-toolbar-title class="hidden-xs-only">
-        <router-link
-          to="/"
-          tag="span"
-          style="cursor: pointer"
-        >
-          Lets Share
-        </router-link>
+        <router-link to="/" tag="span" style="cursor: pointer">Lets Share</router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -76,27 +46,18 @@
 
       <!-- horizontal navbar links -->
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn
-          flat
-          v-for="item in horizontalNavItems"
-          :key="item.title"
-          :to="item.link"
-        >
-          <v-icon
-            class="hidden-sm-only"
-            left
-          >{{ item.icon }}</v-icon>
+        <v-btn flat v-for="item in horizontalNavItems" :key="item.title" :to="item.link">
+          <v-icon class="hidden-sm-only" left>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
-
     </v-toolbar>
 
     <!-- app content -->
     <main>
       <v-container class="mt-4">
         <transition name="fade">
-          <router-view />
+          <router-view/>
         </transition>
       </v-container>
     </main>

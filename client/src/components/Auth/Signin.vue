@@ -1,36 +1,15 @@
 <template>
-  <v-container
-    text-xs-center
-    mt-5
-    pt-5
-  >
+  <v-container text-xs-center mt-5 pt-5>
     <!-- signin title -->
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        sx12
-        sm6
-        offset-sm3
-      >
+    <v-layout row wrap>
+      <v-flex sx12 sm6 offset-sm3>
         <h1>Welcome Back!</h1>
       </v-flex>
     </v-layout>
     <!-- signin form -->
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs12
-        sm6
-        offset-sm3
-      >
-        <v-card
-          color="secondary"
-          dark
-        >
+    <v-layout row wrap>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card color="secondary" dark>
           <v-container>
             <v-form @submit.prevent="handleSigninUser">
               <v-layout row>
@@ -57,10 +36,7 @@
               </v-layout>
               <v-layout row>
                 <v-flex xs12>
-                  <v-btn
-                    color="accent"
-                    type="submit"
-                  ></v-btn>
+                  <v-btn color="accent" type="submit"></v-btn>
                   <h3>Don't have an account?
                     <router-link to="/signup">Signup</router-link>
                   </h3>
