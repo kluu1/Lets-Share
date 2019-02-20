@@ -16,6 +16,7 @@ export const defaultClient = new ApolloClient({
   fetchOptions: {
     credentials: 'include',
   },
+
   request: (operation) => {
     // if no token with key of 'token' in local storage, add it
     if (!localStorage.token) {
@@ -28,6 +29,7 @@ export const defaultClient = new ApolloClient({
       },
     });
   },
+
   onError: ({ graphQLErrors, networkError }) => {
     if (networkError) {
       console.log('[networkError]', networkError);
