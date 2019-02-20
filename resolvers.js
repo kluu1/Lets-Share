@@ -9,15 +9,25 @@ const createToken = (user, secret, expiresIn) => {
 
 module.exports = {
   Query: {
+    getCurrentUser: async (_, args, { User, currentUser }) => {
+      if (!currentUser) {
+        return null;
+      }
+      const user = await User.findOne({ username: currentUser.username }).populate({
+        path: 'favorites',
+        model: 'Post',
+      });
+      return user;
+    },
     getPosts: async (_, args, { Post }) => {
       const posts = await Post.find({})
         .sort({ createdDate: 'desc' })
         .populate({
           path: 'createdBy',
-          model: 'User'
+          model: 'User',
         });
       return posts;
-    }
+    },
   },
 
   Mutation: {
@@ -33,7 +43,7 @@ module.exports = {
         imageUrl,
         categories,
         description,
-        createdBy: creatorId
+        createdBy: creatorId,
       }).save();
       return newPost;
     },
@@ -59,9 +69,9 @@ module.exports = {
       const newUser = await new User({
         username,
         email,
-        password
+        password,
       }).save();
       return { token: createToken(newUser, process.env.SECRET, '1hr') };
-    }
-  }
+    },
+  },
 };
