@@ -99,24 +99,29 @@ export default {
   },
 
   computed: {
+    // load in user data from store
     ...mapGetters(["user"]),
     horizontalNavItems() {
+      // if user is not logged in show posts, signin, signup
       let items = [
         { icon: "chat", title: "Posts", link: "/posts" },
         { icon: "lock_open", title: "Sign In", link: "/signin" },
         { icon: "create", title: "Sign Up", link: "/signup" }
       ];
+      // if user is logged in, just show posts
       if (this.user) {
         items = [{ icon: "chat", title: "Posts", link: "/posts" }];
       }
       return items;
     },
     sideNavItems() {
+      // if user is not logged in show posts, signin, and signup
       let items = [
         { icon: "chat", title: "Posts", link: "/posts" },
         { icon: "lock_open", title: "Sign In", link: "/signin" },
         { icon: "create", title: "Sign Up", link: "/signup" }
       ];
+      // if user is signed in show posts, create post, and profile
       if (this.user) {
         items = [
           { icon: "chat", title: "Posts", link: "/posts" },
